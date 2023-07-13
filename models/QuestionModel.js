@@ -17,6 +17,9 @@ const QuestionSchema = mongoose.Schema({
         type: Number,
         required:true
     },
+    testCaseId:{
+        type : mongoose.Schema.Types.ObjectId
+    }
 });
 
 
