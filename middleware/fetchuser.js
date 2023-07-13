@@ -13,7 +13,7 @@ const fetchuser = async (req, res, next) => {
             req.user = data.result;
             next();
         } catch (error) {
-            res.status(401).send({ success: false, error: "Please authenticate using a Valid token" })
+            res.status(401).send({ success: false, error: "authenticate using a Valid token" })
         }
     }
 }
