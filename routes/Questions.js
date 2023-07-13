@@ -3,19 +3,17 @@ const express = require('express')
 const router = express.Router();
 var request = require('request');
 const fetchuser = require('../middleware/fetchuser')
+const checkAdmin = require('../middleware/admincheck')
 const QuestionSchema = require('../models/QuestionModel')
 var accessToken = process.env.Problems_token;
 var endpoint = process.env.SphereEngineURL;
 
+//Middleware to check admin
+router.use(fetchuser, checkAdmin)
+
 //Route for problem add by admin : /api/v1/problem/add
-router.post('/add', fetchuser, async (req, res) => {
+router.post('/add', async (req, res) => {
     try {
-        if (!req.user.isAdmin) {
-            return res.status(200).json({
-                success: 0,
-                message: "Inaccesible privilege"
-            });
-        }
         var problemData = {
             name: req.body.name,
             masterjudgeId: 1001,
@@ -74,7 +72,7 @@ router.post('/add', fetchuser, async (req, res) => {
 })
 
 //Route for problem update by admin : /api/v1/problem/update
-router.put('/update', fetchuser, async (req, res) => {
+router.put('/update', async (req, res) => {
     try {
         if (!req.user.isAdmin) {
             return res.status(200).json({
@@ -145,7 +143,7 @@ router.put('/update', fetchuser, async (req, res) => {
 })
 
 //Route for problem delete by admin : /api/v1/problem/delete
-router.delete('/delete', fetchuser, async (req, res) => {
+router.delete('/delete', async (req, res) => {
     try {
         if (!req.user.isAdmin) {
             return res.status(200).json({
@@ -172,7 +170,7 @@ router.delete('/delete', fetchuser, async (req, res) => {
                     console.log('Problem deleted');
 
                     const deleteProblem = await QuestionSchema.deleteOne({ problemId: req.body.problemId })
-                    console.log(deleteProblem)
+                    // console.log(deleteProblem)
                     return res.status(200).json({
                         success: 1,
                         message: "Problem deletion Successful",
