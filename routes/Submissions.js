@@ -3,6 +3,7 @@ const express = require('express')
 const router = express.Router();
 var request = require('request');
 const fetchuser = require('../middleware/fetchuser')
+const sendMail = require('./Email')
 var accessToken = process.env.Problems_token;
 var endpoint = process.env.SphereEngineURL;
 
@@ -31,7 +32,7 @@ router.post('/add', async (req, res) => {
             method: 'POST',
             form: submissionData
         }, async function (error, response, body) {
-            console.log(response.body)
+            // console.log(response.body)
             if (error) {
                 console.log('Connection problem');
             }
@@ -40,7 +41,7 @@ router.post('/add', async (req, res) => {
             if (response) {
                 if (response.statusCode === 201) {
                     const newResponse = JSON.parse(response.body)
-                    console.log(JSON.parse(response.body)); // submission data in JSON
+                    // console.log(JSON.parse(response.body)); // submission data in JSON
                     fetchSubmissions(req,res,newResponse.id)
                     // return res.status(200).json({
                     //     success: 1,
@@ -94,6 +95,7 @@ async function fetchSubmissions(req,res,id) {
                     // console.log(newResponse.items[0].executing)
                     if (!newResponse.items[0].executing) {
                         // console.log("Stopping")
+                        sendMail(newResponse.items[0].result.status.name)
                         res.status(200).json({
                             success: 1,
                             message: "Executed Successfully",
