@@ -69,9 +69,9 @@ router.post('/add', async (req, res) => {
                         var body = JSON.parse(response.body);
                         console.log('Error code: ' + body.error_code + ', details available in the message: ' + body.message)
                     }
-                    else {
-                        res.status(400).json('Error code: ' + body.error_code + ', details available in the message: ' + body.message)
-                    }
+
+                    res.status(400).json('Error code: ' + body.error_code + ', details available in the message: ' + body.message)
+
                 }
             }
         });

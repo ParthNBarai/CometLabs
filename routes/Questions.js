@@ -59,8 +59,8 @@ router.post('/add', async (req, res) => {
                     } else if (response.statusCode === 400) {
                         var body = JSON.parse(response.body);
                         console.log('Error code: ' + body.error_code + ', details available in the message: ' + body.message)
-                        res.status(400).json('Error code: ' + body.error_code + ', details available in the message: ' + body.message)
                     }
+                    res.status(400).json('Error code: ' + body.error_code + ', details available in the message: ' + body.message)
                 }
             }
         });
@@ -129,9 +129,9 @@ router.put('/update', async (req, res) => {
                         var body = JSON.parse(response.body);
                         console.log('Error code: ' + body.error_code + ', details available in the message: ' + body.message)
                     }
-                    else {
-                        res.status(400).json('Error code: ' + body.error_code + ', details available in the message: ' + body.message)
-                    }
+
+                    res.status(400).json('Error code: ' + body.error_code + ', details available in the message: ' + body.message)
+
                 }
             }
         });
@@ -183,6 +183,7 @@ router.delete('/delete', async (req, res) => {
                     } else if (response.statusCode === 404) {
                         console.log('Problem not found');
                     }
+                    res.status(400).json('Error code: ' + body.error_code + ', details available in the message: ' + body.message)
                 }
             }
         });
