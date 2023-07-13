@@ -1,5 +1,22 @@
 # CometLabs
 
+## Base Host URL : http://13.233.200.175:8080/
+
+## Routes:
+User signup (POST) : http://13.233.200.175:8080/api/v1/user/signup
+
+User login (POST): http://13.233.200.175:8080/api/v1/user/login
+
+Create Problem (POST): http://13.233.200.175:8080/api/v1/problem/add
+
+Edit Problem (PUT): http://13.233.200.175:8080/api/v1/problem/update
+
+Delete Problem (DELETE) : http://13.233.200.175:8080/api/v1/problem/delete
+
+Create Testcase (POST) : http://13.233.200.175:8080/api/v1/testcase/add
+
+Create Submission (POST) : http://13.233.200.175:8080/api/v1/submissions/add
+
 ## Commands to run the API:
 ### 1. Clone the repository
 ### 2. Use the following credentials for .env:
