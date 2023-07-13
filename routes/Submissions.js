@@ -14,7 +14,7 @@ router.post('/add', async (req, res) => {
 
         const problemId = req.body.problemId
         var submissionData = {
-            problemId: 116992,
+            problemId: problemId,
             compilerId: 10,
             source: `public class Main {
                 static void myMethod() {
