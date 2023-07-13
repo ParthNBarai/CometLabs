@@ -54,7 +54,7 @@ router.post('/add', async (req, res) => {
                     // console.log(updateProblem)
                     return res.status(200).json({
                         success: 1,
-                        message: "Problem creation Successful",
+                        message: "TestCase creation Successful",
                         testNumber: newResponse.number
                     });
                 }
