@@ -13,9 +13,14 @@ const jwt = require("jsonwebtoken");
 router.post('/signup', [
     body('name', 'Enter a valid Name').isLength({ min: 3 }),
     body('password', 'Password must be atleast 8 characters').isLength({ min: 8 }),
-    body('email', 'Enter a valid pincode').isEmail(),
+    body('email', 'Enter a valid email').isEmail(),
 ], async (req, res) => {
     try {
+        var valerr = validationResult(req);
+        if (!valerr.isEmpty()) {
+            // console.log(valerr.mapped())
+            return res.status(401).json(valerr)
+        }
         const salt = genSaltSync(10);
         req.body.password = hashSync(req.body.password, salt);
 
